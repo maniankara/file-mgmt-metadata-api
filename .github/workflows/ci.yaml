@@ -4,11 +4,18 @@ jobs:
     Build-upload-fsmgmt-to-ACR:
         runs-on: ubuntu-latest
         steps:
+
             - name: Checkout code
               uses: actions/checkout@v4
+
             - name: Build image
               run: |
                 docker buildx build -t ${{ SECRETS.ACRURL }}/fsmgmt .
+
+            - name: Unit Test
+              run: |
+                docker run --name fsmgmt --rm -p 8000:80 -v /tmp:/files -it fsmgmt pytest --exitfirst test_main.py
+
             - name: Login to the registry and push
               run: |
                 echo ${{ SECRETS.ACRPASSWORD }} | docker login ${{ SECRETS.ACRURL }} --username ${{ SECRETS.ACRUSERNAME }} --password-stdin
