@@ -8,4 +8,8 @@ jobs:
               uses: actions/checkout@v4
             - name: Build image
               run: |
-                docker buildx build -t fsmgmt .
+                docker buildx build -t ${{ SECRETS.ACRURL }}/fsmgmt .
+            - name: Login to the registry and push
+              run: |
+                echo ${{ SECRETS.ACRPASSWORD }} | docker login ${{ SECRETS.ACRURL }} --username ${{ SECRETS.ACRUSERNAME }} --password-stdin
+                docker push ${{ SECRETS.ACRURL }}/fsmgmt
