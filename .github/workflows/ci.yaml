@@ -1,0 +1,11 @@
+name: fsmgmt CI setup, builds and uploads the image to ACR
+on: [push]
+jobs:
+    Build-upload-fsmgmt-to-ACR:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+            - name: Build image
+              run: |
+                docker buildx build -t fsmgmt .
