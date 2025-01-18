@@ -25,6 +25,48 @@ docker logs fsmgmt
 ```
 
 ## Deploy it to the production
+The infrastructure is implemented with terraform and all the configs and scripts exists under `infra/` directory
+
+### Prerequisites:
+1. `terraform` installed and available on the path
+2. `az` cli installed and ready to be logged in
+
+### Setup the environment
+1. Setup python `fsmgmt` venv environment
+```
+python -m venv fsmgmt
+source fsmgmt/bin/activate
+```
+2. Setup subscription and credentials
+a. Change directory to the correct directory
+```
+cd infra/
+```
+b. Store `.env.template` to `.env` and values to it.
+```
+cp .env.template .env
+# Edit .env and fill-in values
+```
+c. Source those values with `source` command
+```
+source .env
+```
+d. Login to your Azure subscription with az cli to provide access to terraform
+```
+az login
+```
+
+### Perform the infra creation
+
+1. Terraform initialize
+```
+terraform init
+```
+2. Terraform apply
+```
+terraform apply
+```
+
 
 
 ## Plan
