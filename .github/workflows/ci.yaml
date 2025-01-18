@@ -14,7 +14,7 @@ jobs:
 
             - name: Unit Test
               run: |
-                docker run --name fsmgmt --rm -p 8000:80 -v /tmp:/files fsmgmt pytest --exitfirst test_main.py
+                docker run --name fsmgmt --rm -p 8000:80 -v /tmp:/files ${{ SECRETS.ACRURL }}/fsmgmt pytest --exitfirst test_main.py
 
             - name: Login to the registry and push
               run: |
