@@ -1,6 +1,12 @@
 # A file management metadata API
 A simple *File Management System* backend application using *python fast API*  deployed in *Azure apps* that allows users to upload, retrieve, and manage files. The project will integrate with *Azure service bus* for message processing and *Azure Blob* for file storage, along with *CosmosDB* for storing metadata about the uploaded files.
 
+## Architecture
+Terraform provisions the infra and github actions handles the CI.
+![architecture](./fsmgmt_arch.png)
+From the architecture, the step `1` is a provisioning step which creates the infra and also update secrets to github actions.
+The step `2` updates the container registry upon github actions run.
+
 ## Contribution
 Thank you for your interest for contributing
 ### Setting up a local environment
